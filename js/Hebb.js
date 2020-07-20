@@ -77,3 +77,4 @@ function hebb(valor) {
 
     principal();
 }
+w

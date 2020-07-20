@@ -1,4 +1,5 @@
 'use strict'
+
 //VOCABULARIO
 var positivas = ['aceptar', 'gracias','compasion',
 'tolerancia', 'puedo','vamos','posible','amor','feliz','util','aprecio','si','vida']
@@ -16,15 +17,24 @@ var salida_esperada = [1,0,-1];
 var tasa_aprendizaje = 1;
 var a = 0,b = 0,c = 0;
 
+var iteraciones = 0;
+var var_suma = 0;
+var suma = 0;
+var estado = '';
+
+//PRINTS
+var printPesos = [];
+var printPesosIniciales = [];
+var printPalabra = '';
+
 //PESOS
-var peso1 = 5;
-var peso2 = 2;
-var peso3 = 1;
-var peso4 = -1;
-var pesosSinapticos = [peso1, peso2, peso3, peso4];
+var pesosSinapticos = [];
+
+
 
 function principal() {
     palabra = document.getElementById('palabra').value;
+    printPalabra = palabra;
     palabra = palabra.split(' ');
 
     palabra.forEach(element => {
@@ -51,15 +61,27 @@ function principal() {
 
     palabra_numerico = palabra;
     
-    let suma = (palabra[0]*pesosSinapticos[0])+(palabra[1]*pesosSinapticos[1])+(palabra[2]*pesosSinapticos[2])+(palabra[3]*pesosSinapticos[3]);
+
+    if (iteraciones == 0) {
+        for(let i = 0; i < palabra.length; i++) {
+            let valorPeso = Math.floor(Math.random() * (200 - -200)) + -200  
+            pesosSinapticos[i] = valorPeso;
+            printPesos.push(valorPeso);
+            printPesosIniciales = printPesos;
+        }
+    }
+
+    for(let i =0; i < palabra.length; i++) {
+        var_suma = (palabra[i]*pesosSinapticos[i]);
+        suma += var_suma
+    }
     
     for (let i = 0; i < palabra.length; i++) {
         if(palabra[i] > 0) {
             a++;
         } else if(palabra[i] < 0) {
             c++;
-        }
-        
+        }  
     }
 
     activacion(suma);
@@ -76,7 +98,7 @@ function activacion(valor){
 }
 
 function error(valor) {
-    debugger
+    
     let count = 0;
     if(a >= b && a > c){
         count = 0;
@@ -90,22 +112,42 @@ function error(valor) {
     if(aprendizaje != 0) {
         pesoSinaptico(aprendizaje, palabra)
     } else {
-        
-        if(a >= b && a > c){
-            console.log('Es veridica!');
+        if(a > c){
+            estado = 'Publicada';
+            print();
         }else{
-            console.log('No es veridica!')
+            estado = 'No publicada'
+            print();
         }
     }
 }
 
 function pesoSinaptico(aprendizaje, entrada) {
     var variacion = 0;
-    for(let i = 0; i < 4; i++) {
+    printPesos = [];
+    for(let i = 0; i < palabra_numerico.length; i++) {
         variacion = tasa_aprendizaje * aprendizaje * entrada[i];
         pesosSinapticos[i] = pesosSinapticos[i] + variacion;
+        printPesos.push(pesosSinapticos[i]);
     }
+    iteraciones += 1;
+    suma = 0;
     console.log(pesosSinapticos)
 
     principal();
+    
+}
+
+function print() {
+    var iteracion = document.getElementById('iteracion');
+    var pesos = document.getElementById('pesos')
+    var pesosIniciales = document.getElementById('pesosIniciales')
+    var estadoFinal = document.getElementById('estadoFinal')
+    var publicacion = document.getElementById('publicacion')
+
+    publicacion.innerHTML = printPalabra;
+    estadoFinal.innerHTML = estado;
+    pesosIniciales.innerHTML = "[" + printPesosIniciales + "]";    
+    pesos.innerHTML = "[" + printPesos + "]";
+    iteracion.innerHTML = iteraciones;
 }
