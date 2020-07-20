@@ -115,6 +115,7 @@ function error(valor) {
         if(a > c){
             estado = 'Publicada';
             print();
+            publicar();
         }else{
             estado = 'No publicada'
             print();
@@ -150,4 +151,17 @@ function print() {
     pesosIniciales.innerHTML = "[" + printPesosIniciales + "]";    
     pesos.innerHTML = "[" + printPesos + "]";
     iteracion.innerHTML = iteraciones;
+}
+
+function publicar() {
+    var miObjeto = { 
+        'frase': printPalabra
+    };
+
+    // Guardo el objeto como un string
+    localStorage.setItem('datos', JSON.stringify(miObjeto));
+
+    var guardado = localStorage.getItem('datos');
+
+    console.log('objetoObtenido: ', JSON.parse(guardado));
 }
