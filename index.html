@@ -3,38 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
 <body>
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand">Control de publicaciones</a>
         <div class="form-inline">
-            <button class="btn btn-outline-success my-2 my-sm-0 btn-neurona" >Neurona</button>
-            <button class="btn btn-outline-success my-2 my-sm-0" >Publicaciones</button>
+            <a href="index.html"><button class="btn btn-outline-success my-2 my-sm-0 btn-neurona" >Neurona</button></a>
+            <a href="pagina.html"><button class="btn btn-outline-success my-2 my-sm-0" >Publicaciones</button></a>
         </div>
     </nav> 
 
-    <input class="input" id="palabra" type="text">
-    <button class="btn btn-primary" onclick="principal()">click</button>
-
-    <div>
-        <ul class="list-group list-group-horizontal-sm">
-            <li class="list-group-item">Pesos Sinapticos</li>
-            <li class="list-group-item">Recalculo de pesos</li>
-            <li class="list-group-item">N. Iteraciones</li>
-            <li class="list-group-item">Estado</li>
-        </ul>
-        <ul class="list-group list-group-horizontal-sm">
-            <li id="pesosIniciales" class="list-group-item">Pesos iniciales</li>
-            <li id="pesos" class="list-group-item">Pesos finales</li>
-            <li id="iteracion" class="list-group-item">N. Iteraciones</li>
-            <li id="estadoFinal" class="list-group-item">Estado</li>
-            <li id="publicacion" class="list-group-item">Estado</li>
-        </ul>
-    </div>
+    <div class="container h-100">
+        <div class="row justify-content-center h-100">
+            <div class="col-sm-15 align-self-center text-center">
+                <div class="card shadow">
+                    <div class="card-body">           
+                        <div class="main center">
+                            <div class="input-frase">
+                                <input class="input" id="palabra" type="text">
+                                <button class="btn btn-primary" onclick="principal()">click</button>
+                            </div>
+                            <div class="input-data">
+                                <ul class="list-group list-group-horizontal-sm">
+                                    <li class="list-group-item item-main">Pesos Sinapticos</li>
+                                    <li class="list-group-item item-main">Recalculo de pesos</li>
+                                    <li class="list-group-item item-main">N. Iteraciones</li>
+                                    <li class="list-group-item item-main">Estado</li>
+                                    <li class="list-group-item item-main">Palabra</li>
+                                </ul>
+                                <ul class="list-group list-group-horizontal-sm">
+                                    <li id="pesosIniciales" class="list-group-item item-main"></li>
+                                    <li id="pesos" class="list-group-item item-main"></li>
+                                    <li id="iteracion" class="list-group-item item-main"></li>
+                                    <li id="estadoFinal" class="list-group-item item-main"></li>
+                                    <li id="publicacion" class="list-group-item item-main"></li>
+                                </ul>
+                            </div>
+                        </div>             
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
 
 
     <script src="js/index.js"></script>

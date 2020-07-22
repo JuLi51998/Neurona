@@ -4,7 +4,7 @@
 var positivas = ['aceptar', 'gracias','compasion',
 'tolerancia', 'puedo','vamos','posible','amor','feliz','util','aprecio','si','vida']
 var negativas = ['pereza','no','aburre','triste','enojo','preocupado',',imposible',
-'odio','aburrido','culpa','feo','inutil','malo','']
+'odio','aburrido','culpa','feo','inutil','malo']
 var neutras = [];
 
 //VARIALBLES
@@ -154,14 +154,36 @@ function print() {
 }
 
 function publicar() {
-    var miObjeto = { 
-        'frase': printPalabra
-    };
-
-    // Guardo el objeto como un string
-    localStorage.setItem('datos', JSON.stringify(miObjeto));
-
     var guardado = localStorage.getItem('datos');
+    var ObjetoObtenido = JSON.parse(guardado);
+    ObjetoObtenido = Object.values(ObjetoObtenido);
+    ObjetoObtenido.push(printPalabra);
+    // Guardo el objeto como un string
+    localStorage.setItem('datos', JSON.stringify(ObjetoObtenido));
+}
 
-    console.log('objetoObtenido: ', JSON.parse(guardado));
+function publicaciones() {
+    var guardado = localStorage.getItem('datos');
+    var arrayGuardado = JSON.parse(guardado);
+ 
+    arrayGuardado.forEach(element => {
+        $("<div>", {
+            'class': 'card'
+        }).append(
+            $('<h5>', {
+                'class': 'card-header',
+                'text': 'Positivo'
+            }),
+            $('<div>', {
+                'class': 'card-body',
+            }).append(
+                $('<p>', {
+                    'class': 'card-text',
+                    'id': 'frasePublicada',
+                    'text': element
+                })
+              )
+        ).appendTo('#otraDiv').fadeIn('slow');
+    });
+    
 }
